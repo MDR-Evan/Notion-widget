@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .time{
+            color: #C596D9;
+        }
+        .date{
+            padding-left: 1px;
+        }
+    </style>
+</head>
+<body class="center">
+    <div class="clock">
+      <h1 class="time">11:29:02 </h1>
+        <h5 class="date">Sunday, January 21</h5>
+    </div>
+  
+    <script>
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const padLeft = (num) => {
+        if (String(num).length > 2) {
+            return num;
+        }
+        return String("00" + num).slice(-2);
+        }
+
+        setInterval(function() {
+        if("Asia/Seoul") {
+            const today = new Date();
+            const timeInTZ = new Date(today.toLocaleString('en-US', {
+            timeZone: 'Asia/Seoul'
+            }))
+
+            // time
+            let hours = timeInTZ.getHours();
+            const minutes = timeInTZ.getMinutes();
+            const seconds = timeInTZ.getSeconds();
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            const hasampm = true;
+            if(hasampm) {
+            ampm = '';
+            }
+            hours = hasampm ? hours : hours % 12;
+            hours = hours ? hours : 12;
+
+            // date
+            const day = days[timeInTZ.getDay()];
+            const month = months[timeInTZ.getMonth()];
+            const dateNum = timeInTZ.getDate();
+
+
+            if (true) {
+            document.querySelector(".time").innerHTML = padLeft(hours)+":"+padLeft(minutes)+":"+padLeft(seconds)+" "+ampm;
+            } else {
+            document.querySelector(".time").innerHTML = padLeft(hours)+":"+padLeft(minutes)+" "+ampm;
+            }
+
+            if(true) {
+            document.querySelector(".date").innerHTML = day+", "+month+" "+padLeft(dateNum);
+            }
+        }
+        }, 1000)
+    </script>
+</body>
+</html>
